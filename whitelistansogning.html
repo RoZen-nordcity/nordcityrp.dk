@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NordCityRP - Whitelist Ansøgning</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body {
+            background: url('https://media.discordapp.net/attachments/1337752887098347621/1337798276224913449/baby_girl_2025.png?ex=67c8653c&is=67c713bc&hm=1acf26bcf0863a691bce887e8e9bc043698ad34d5fefef3f2c76084e61935c85&=&format=webp&quality=lossless&width=1766&height=902') no-repeat center center/cover;
+            display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;
+            position: relative; overflow: hidden; color: white;
+        }
+        body::before { content: ""; position: absolute; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); z-index: -1; }
+        .logo { width: 200px; margin-bottom: 20px; cursor: pointer; }
+        .container {
+            background: rgba(0, 0, 0, 0.8); padding: 25px; border-radius: 10px; text-align: center;
+            width: 400px; box-shadow: 0 0 15px rgba(255, 165, 0, 0.8);
+        }
+        h1 { font-size: 1.8rem; margin-bottom: 10px; color: orange; }
+        label { display: block; margin-top: 10px; font-weight: bold; text-align: left; }
+        input, textarea {
+            width: 100%; padding: 10px; margin-top: 5px; border: none; border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1); color: white; outline: none;
+        }
+        textarea { height: 80px; resize: none; }
+        .submit-btn {
+            background: linear-gradient(90deg, orange, darkorange); color: white; padding: 12px;
+            font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; margin-top: 15px; width: 100%;
+            transition: 0.3s ease-in-out; box-shadow: 0 0 10px rgba(255, 140, 0, 0.8);
+        }
+        .submit-btn:hover { background: linear-gradient(90deg, darkorange, orange); transform: scale(1.05); }
+    </style>
+</head>
+<body>
+
+    <a href="forside.html">
+        <img src="https://media.discordapp.net/attachments/1283462421293564030/1346554703541964824/Nordcity.png?ex=67c89c4b&is=67c74acb&hm=3be16ad7617ca1987aeffc139327e009ec6eed6a51ec9402cabf7020b2a453f5&=&format=webp&quality=lossless" 
+             alt="NordCity Logo" class="logo">
+    </a>
+
+    <div class="container">
+        <h1>Whitelist Ansøgning</h1>
+        <form id="applicationForm">
+            <label>💬 Discord Navn</label>
+            <input type="text" id="discordNavn" placeholder="Skriv dit Discord navn..." required>
+
+            <label>🆔 Discord ID</label>
+            <input type="text" id="discordID" placeholder="Skriv dit Discord ID..." required>
+
+            <label>🎂 Alder</label>
+            <input type="number" id="alder" placeholder="Skriv din alder..." required>
+
+            <label>🎮 Steam Profil</label>
+            <input type="text" id="steam" placeholder="Indsæt link til din Steam profil..." required>
+
+            <label>🎭 Hvad betyder RP for dig?</label>
+            <textarea id="rpBetydning" placeholder="Skriv din forklaring her..." required></textarea>
+
+            <button type="submit" class="submit-btn">Send Ansøgning</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("applicationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const webhookURL = "https://discordapp.com/api/webhooks/1345783815028867113/Jfx50fKc-G21ZUVrAxKcVUZ94cakslLA_8byxESNZseto_mQQr0qv6G0xQU9lzFR6MtR";
+            
+            const discordNavn = document.getElementById("discordNavn").value;
+            const discordID = document.getElementById("discordID").value;
+            const alder = document.getElementById("alder").value;
+            const steam = document.getElementById("steam").value;
+            const rpBetydning = document.getElementById("rpBetydning").value;
+
+            const embed = {
+                username: "Whitelist Ansøgning",
+                avatar_url: "https://media.discordapp.net/attachments/1283462421293564030/1346554703541964824/Nordcity.png",
+                embeds: [{
+                    title: "Ny Whitelist Ansøgning",
+                    color: 16750848,  
+                    fields: [
+                        { name: "💬 Discord Navn", value: discordNavn, inline: true },
+                        { name: "🆔 Discord ID", value: discordID, inline: true },
+                        { name: "🎂 Alder", value: alder, inline: true },
+                        { name: "🎮 Steam Profil", value: steam },
+                        { name: "🎭 Hvad betyder RP for dig?", value: rpBetydning }
+                    ],
+                    footer: { text: "NordCityRP Whitelist Ansøgning" }
+                }]
+            };
+
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(embed)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("✅ Ansøgningen er sendt!");
+                    document.getElementById("applicationForm").reset();
+                } else {
+                    alert("❌ Fejl! Prøv igen.");
+                }
+            })
+            .catch(error => {
+                console.error("Fejl:", error);
+                alert("❌ Fejl! Prøv igen.");
+            });
+        });
+    </script>
+
+</body>
+</html>

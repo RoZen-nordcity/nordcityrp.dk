@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NordCityRP Forside</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"> <!-- Favicon tilføjet -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://fivemods.io/images/graphics-slider/2a.webp') no-repeat center center/cover;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Gråt filter over baggrundsbilledet */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* 60% gennemsigtigt gråt lag */
+            z-index: -1;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-links a, .dropdown-toggle {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 15px;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hover-effekt til menupunkter */
+        .nav-links a:hover, .dropdown-toggle:hover {
+            color: #FFA500;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.8);
+            transform: scale(1.1);
+        }
+
+        .dropdown {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(255, 136, 0, 0.5); /* 50% gennemsigtig */
+            min-width: 180px;
+            box-shadow: 0px 0px 15px rgba(255, 165, 0, 0.8);
+            border-radius: 5px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .dropdown-content a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Orange glød-effekt til titlen */
+        .hero h1 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #FFA500;
+            text-shadow: 0 0 10px rgba(255, 165, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.6);
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { text-shadow: 0 0 10px rgba(255, 165, 0, 0.8), 0 0 20px rgba(255, 165, 0, 0.6); }
+            100% { text-shadow: 0 0 20px rgba(255, 165, 0, 1), 0 0 30px rgba(255, 165, 0, 0.9); }
+        }
+
+        .hero p {
+            font-size: 22px;
+            max-width: 700px;
+            margin-top: 10px;
+        }
+
+        .server-status {
+            background-color: #e02619;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-overlay"></div> <!-- Gråt filter over baggrunden -->
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Forside</a>
+            <a href="regler.html">Regler</a>
+
+            <!-- Dropdown-menu til ansøgninger -->
+            <div class="dropdown">
+                <a class="dropdown-toggle">Ansøgninger</a>
+                <div class="dropdown-content">
+                    <a href="staffansogning.html">Staff Ansøgning</a>
+                    <a href="firmaansogning.html">Firma Ansøgning</a>
+                    <a href="bandeansogning.html">Bande Ansøgning</a>
+                    <a href="whitelistansogning.html">Whitelist Ansøgning</a>
+                </div>
+            </div>
+
+            <a href="kontakt.html">Kontakt</a>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>Velkommen til NordCity Roleplay!</h1>
+        <p>NordCityRP - En server til spillerne af spillerne<br>
+            Passioneret for at give jer den bedste spilleroplevelse!
+        </p>
+        <div class="server-status" id="server-status">SERVEREN ER OFFLINE</div>
+        <p id="player-count">Spillere: 0/1000</p>
+    </div>
+
+    <footer class="footer">
+        &copy; 2025 NordCityRP. Alle rettigheder forbeholdes.
+    </footer>
+
+    <script>
+        async function fetchServerData() {
+            try {
+                const response = await fetch('http://149.22.78.41:30120/players.json');
+                if (!response.ok) throw new Error('Server offline');
+                const players = await response.json();
+                document.getElementById('player-count').innerText = `Spillere: ${players.length}/1000`;
+                document.getElementById('server-status').innerText = "SERVEREN ER ONLINE";
+            } catch (error) {
+                document.getElementById('player-count').innerText = "Spillere: 0/64";
+                document.getElementById('server-status').innerText = "SERVEREN ER OFFLINE";
+            }
+        }
+
+        fetchServerData();
+        setInterval(fetchServerData, 30000);
+    </script>
+
+</body>
+</html>
